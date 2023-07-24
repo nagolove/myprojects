@@ -47,6 +47,9 @@ void parse_bracketed_string(
     *second = calloc(cap, sizeof(int));
     assert(*second);
 
+    int *_first = *first;
+    int *_second = *second;
+
     const char *p = str;
     while (*p) {
         if (*p == '[') {
@@ -67,9 +70,11 @@ void parse_bracketed_string(
                 *first = realloc(*first, sizeof(int) * cap);
                 *second = realloc(*second, sizeof(int) * cap);
             }
-            **first++ = first_num;
-            **second++ = second_num;
-            (*len)++;
+            printf("first_num %d, second_num %d\n", first_num, second_num);
+            *_first = first_num;
+            _first++;
+            *_second = second_num;
+            _second++;
             p += substr_len;
         }
         p++;
